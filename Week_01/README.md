@@ -23,7 +23,7 @@ removeFirst==b
 removeFirst==a
 removeFirst==B
 
-* 分析 Queue 和 Priority Queue 的源码
+分析 Queue 和 Priority Queue 的源码
 
 Queue的源码比较简单：
  Queue<E> extends Collection<E>
