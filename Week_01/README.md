@@ -49,7 +49,6 @@ Examine(检查)
 // 返回 null
 <td>{@link Queue#peek peek()}</td>
 
-
 Priority Queue的源码分析：
 调用add——>>
 offer——>>grow(i + 1)——>>Arrays.copyOf(queue, newCapacity)——>>
