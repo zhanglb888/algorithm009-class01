@@ -1,0 +1,24 @@
+public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return new ArrayList<>();
+        }
+
+        Map<String, List<String>> map = new HashMap<>();
+        // 遍历字符数组
+        for (String s : strs) {
+            // 定义一个ca字符
+            char[] ca = new char[26];
+            for (char c : s.toCharArray()) {
+                // 相等于c - 'a' == 2
+                ca[c - 'a']++;
+            }
+            
+            String keyStr = String.valueOf(ca);
+            if (!map.containsKey(keyStr)) {
+                map.put(keyStr, new ArrayList<>());
+            }
+            // 把数组添加到集合中
+            map.get(keyStr).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
