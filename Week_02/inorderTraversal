@@ -1,0 +1,18 @@
+public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+       Stack<TreeNode> stack = new Stack<>();
+       // 当前根节点
+       TreeNode  curr = root;
+       while (curr != null || !stack.isEmpty()){
+           while (curr!=null){
+               // 压入栈中 并进行左节点
+               stack.push(curr);
+               curr = curr.left;
+           }
+           // 弹出栈中
+           curr = stack.pop();
+           res.add(curr.val);
+           curr = curr.right;
+       }
+       return res;
+    }
