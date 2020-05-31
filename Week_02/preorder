@@ -1,0 +1,16 @@
+ List<Integer> result = new ArrayList<>();
+
+    public List<Integer> preorder(Node root) {
+        helper(root);
+        return result;
+    }
+
+    public void helper(Node root) {
+        if (root == null) {
+            return;
+        }
+        result.add(root.val);
+        for (int i = 0; i < root.children.size(); i++) {
+            helper(root.children.get(i));
+        }
+    }
