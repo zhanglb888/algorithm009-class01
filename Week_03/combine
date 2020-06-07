@@ -1,0 +1,30 @@
+77. 组合
+https://leetcode-cn.com/problems/combinations/
+class Solution {
+      List<List<Integer>> res = new ArrayList<>();
+
+    public List<List<Integer>> combine(int n, int k) {
+        if (k <= 0 || n <= 0) {
+            return res;
+        }
+        List<Integer> track = new ArrayList<>();
+        backtrack(n, k, 1, track);
+        return res;
+    }
+
+    private void backtrack(int n, int k, int start, List<Integer> track) {
+        // 到达树的底部
+        if (k == track.size()) {
+            res.add(new ArrayList<>(track));
+            return;
+        }
+        // 注意 i 从start 开始递增
+        for (int i = start; i <= n; i++) {
+            // 做选择
+            track.add(i);
+            backtrack(n, k, i + 1, track);
+            // 撤销选择
+            track.remove(track.size() - 1);
+        }
+    }
+}
