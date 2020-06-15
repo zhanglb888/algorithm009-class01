@@ -1,0 +1,19 @@
+455. 分发饼干
+
+class Solution {
+    public int findContentChildren(int[] gird, int[] children) {
+        if (gird == null || children == null) {
+            return 0;
+        }
+        Arrays.sort(gird);
+        Arrays.sort(children);
+        int gi = 0, si = 0;
+        while (gi < gird.length && si < children.length) {
+            if (gird[gi] <= children[si]) {
+                gi++;
+            }
+            si++;
+        }
+        return gi;
+    }
+}
