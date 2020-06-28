@@ -1,0 +1,20 @@
+552. 学生出勤记录 II
+
+class Solution {
+   long M = 1000000007;
+
+    public int checkRecord(int n) {
+        long a010 = 1, a011 = 0, a012 = 0, a110 = 0, a111 = 0, a112 = 0;
+        for (int i = 0; i <= n; i++) {
+            long a010_ = (a010 + a011 + a012) % M;
+            a012 = a011;
+            a011 = a010;
+            a010 = a010_;
+            long a110_ = (a010 + a110 + a111 + a112) % M;
+            a112 = a111;
+            a111 = a110;
+            a110 = a110_;
+        }
+        return (int) a110;
+    }
+}
