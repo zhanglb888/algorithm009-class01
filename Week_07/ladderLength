@@ -1,0 +1,60 @@
+class Solution {
+    public int ladderLength(String beginWord, String endWord,
+                            List<String> wordList) {
+        // 先将 wordList 放到哈希表里，便于判断某个单词是否在wordList 里
+        Set<String> wordSet = new HashSet<>(wordList);
+        if (wordSet.size() == 0 || !wordSet.contains(endWord)) {
+            return 0;
+        }
+        // 标准写法，总的visited 数组
+        Set<String> visited = new HashSet<>();
+        // 分别向左边和右边扩散的哈希表代替单向BFS里的队列
+        Set<String> beginVisited = new HashSet<>();
+        beginVisited.add(beginWord);
+
+        Set<String> endVisited = new HashSet<>();
+        endVisited.add(endWord);
+
+        int len = beginWord.length();
+        int step = 1;
+        // 简化成while
+        while (!beginVisited.isEmpty() && !endVisited.isEmpty()) {
+            // 优先选择小的哈希表进行扩散，考虑到的情况更少
+            if (beginVisited.size() > endVisited.size()) {
+                Set<String> temp = beginVisited;
+                beginVisited = endVisited;
+                endVisited = temp;
+            }
+
+            Set<String> nextLevelVisited = new HashSet<>();
+            for (String word : beginVisited) {
+                char[] charArray = word.toCharArray();
+                for (int i = 0; i < len; i++) {
+                    char currentChar = charArray[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (charArray[i] == c) {
+                            continue;
+                        }
+                        charArray[i] = c;
+                        String nextWord = String.valueOf(charArray);
+                        if (wordSet.contains(nextWord)) {
+                            if (endVisited.contains(nextWord)) {
+                                return step + 1;
+                            }
+                            if (!visited.contains(nextWord)) {
+                                nextLevelVisited.add(nextWord);
+                                visited.add(nextWord);
+                            }
+                        }
+                    }
+                    // 恢复，下次再用
+                    charArray[i] = currentChar;
+                }
+            }
+            // 这一行代表表示从begin这一层向外扩散了一层
+            beginVisited = nextLevelVisited;
+            step++;
+        }
+        return 0;
+    }
+}
