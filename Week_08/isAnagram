@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+         if (s.length() != t.length()) {
+            return false;
+        }
+        // 初始化一个26个数组
+        int[] counter = new int[26];
+        // 遍历s和t的字符串
+        for (int i = 0; i <= s.length() - 1; i++) {
+            //  s.charAt(i) - 'a'相当于'z'-'a'=25
+            counter[s.charAt(i) - 'a']++;
+            counter[t.charAt(i) - 'a']--;
+        }
+        // 遍历数组为0则相等
+        for (int count : counter) {
+            if (count != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
